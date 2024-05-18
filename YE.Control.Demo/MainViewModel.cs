@@ -17,7 +17,7 @@ namespace YE.Control.Demo
 
 
         [ObservableProperty]
-        private string imagePathUri = "C:\\Users\\deng\\Desktop\\gitlab修改密码.PNG";
+        private string imagePathUri;
 
         [RelayCommand]
         public void SelectImage()
