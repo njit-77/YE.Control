@@ -1,7 +1,11 @@
 # YE.Control
+YE.Control是一个基于WPF框架的控件库。
+
+
+
 ## UserControl
 
-#### IP
+#### IP  IP地址控件，可绑定IP地址、端口号。IP端口号通过'HasPort'设置启用与否。
 
 ```xaml
 xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
@@ -17,7 +21,7 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
               BorderThickness="1" />
 ```
 
-#### ImageEx
+#### ImageEx  图像显示控件，基于System.Windows.Controls.Image控件增加了图像缩放、拖动、鼠标点击事件[右键单击-图像大小还原]
 
 ```xaml
 xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
