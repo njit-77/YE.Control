@@ -8,12 +8,18 @@
     <Compile Update="UserControls\IP.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\StatusLED.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="UserControls\ImageEx.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\IP.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\StatusLED.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

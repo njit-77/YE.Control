@@ -32,7 +32,7 @@ namespace YE.Control.UserControls
         #region DependencyProperty
 
         /// <summary>
-        /// IP地址，default = defaultIP
+        /// IP地址，Default Value = defaultIP
         /// </summary>
         public string IPAddress
         {
@@ -57,7 +57,7 @@ namespace YE.Control.UserControls
         );
 
         /// <summary>
-        /// 是否有端口号,default = false
+        /// 是否有端口号，Default Value = false
         /// </summary>
         public bool HasPort
         {
@@ -72,6 +72,9 @@ namespace YE.Control.UserControls
             new PropertyMetadata(false)
         );
 
+        /// <summary>
+        /// IP端口号，Default Value = 8501
+        /// </summary>
         public int IPPort
         {
             get { return (int)GetValue(IPPortProperty); }

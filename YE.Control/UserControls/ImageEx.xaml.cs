@@ -24,7 +24,7 @@ namespace YE.Control.UserControls
         #region DependencyProperty
 
         /// <summary>
-        /// Border.BorderBrush default = Brushes.LightGray
+        /// Border.BorderBrush Default Value = Brushes.LightGray
         /// </summary>
         public Brush MarginColor
         {

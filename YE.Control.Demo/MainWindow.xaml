@@ -57,5 +57,17 @@
                         Command="{Binding SelectImageCommand}" />
             </StackPanel>
         </TabItem>
+        <TabItem Header="StatusLED">
+            <StackPanel>
+                <yecontrol:StatusLED Margin="5"
+                                     HorizontalAlignment="Left"
+                                     StatusText="服务器"
+                                     StatusColor="{Binding ServerLEDColor}" />
+                <yecontrol:StatusLED Margin="5"
+                                     HorizontalAlignment="Left"
+                                     StatusText="客户端"
+                                     StatusColor="{Binding ClientLEDColor}" />
+            </StackPanel>
+        </TabItem>
     </TabControl>
 </Window>
