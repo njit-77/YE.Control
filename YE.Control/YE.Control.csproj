@@ -7,7 +7,7 @@
 	  <LangVersion>latest</LangVersion>
 	  <Company>YE</Company>
 	  <Authors>$(Company)</Authors>
-	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <AssemblyTitle>YE.Control</AssemblyTitle>
 	  <VersionPrefix>0.1</VersionPrefix>
@@ -17,7 +17,8 @@
 	  <AssemblyVersion>$(Version)</AssemblyVersion>
 	  <Copyright>Copyright © 2020-$([System.DateTime]::Now.ToString(`yyyy`)) njit-77. All rights reserved.</Copyright>
 	  <OutputPath>..\bin</OutputPath>
-	  <PackageReleaseNotes>Add UserControl StatusColor</PackageReleaseNotes>  
+	  <PackageReleaseNotes>Add UserControl StatusColor</PackageReleaseNotes>
+	  <Description>YE.Control是一个基于WPF框架的控件库</Description>  
   </PropertyGroup>
 
   <ItemGroup>
