@@ -17,8 +17,7 @@
 	  <AssemblyVersion>$(Version)</AssemblyVersion>
 	  <Copyright>Copyright © 2020-$([System.DateTime]::Now.ToString(`yyyy`)) njit-77. All rights reserved.</Copyright>
 	  <OutputPath>..\bin</OutputPath>
-	  <PackageReleaseNotes>add ImageEx UserControl</PackageReleaseNotes>
-	  <Description>Add UserControl StatusColor</Description>	  
+	  <PackageReleaseNotes>Add UserControl StatusColor</PackageReleaseNotes>  
   </PropertyGroup>
 
   <ItemGroup>
