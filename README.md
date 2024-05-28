@@ -32,3 +32,18 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
                    ImageExSource="{Binding ImagePathUri}" />
 ```
 
+#### StatueLED 状态灯控件，用于网络状态或其它状态
+
+```xaml
+xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
+
+<yecontrol:StatusLED Margin="5"
+                     HorizontalAlignment="Left"
+                     StatusText="服务器"
+                     StatusColor="{Binding ServerLEDColor}" />
+<yecontrol:StatusLED Margin="5"
+                     HorizontalAlignment="Left"
+                     StatusText="客户端"
+                     StatusColor="{Binding ClientLEDColor}" />
+```
+
