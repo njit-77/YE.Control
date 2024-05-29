@@ -40,6 +40,18 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
 
 #### ImageEx  图像显示控件，基于System.Windows.Controls.Image控件增加了图像缩放、拖动、鼠标点击事件[右键单击-图像大小还原]
 
+###### 依赖属性
+
+```csharp
+/// Image控件边框颜色 Default Value = Brushes.LightGray
+System.Windows.Media.Brush MarginColor;
+
+/// 图像内容
+ImageSource ImageExSource;
+```
+
+
+
 ###### 样例
 
 ```xaml

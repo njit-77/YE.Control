@@ -17,7 +17,7 @@
 	  <AssemblyVersion>$(Version)</AssemblyVersion>
 	  <Copyright>Copyright © 2020-$([System.DateTime]::Now.ToString(`yyyy`)) njit-77. All rights reserved.</Copyright>
 	  <OutputPath>..\bin</OutputPath>
-	  <PackageReleaseNotes>Add UserControl StatusColor</PackageReleaseNotes>
+	  <PackageReleaseNotes>完善StatusLED控件</PackageReleaseNotes>
 	  <Description>YE.Control是一个基于WPF框架的控件库</Description>  
   </PropertyGroup>
 
