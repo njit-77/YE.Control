@@ -15,7 +15,7 @@ namespace YE.Control.UserControls
     ///               Height="30"
     ///               Margin="5"
     ///               HasPort="True"
-    ///               IPAddress="{Binding ServerIP, Mode=TwoWay}"
+    ///               IPAddress="{Binding ServerIP}"
     ///               IPPort="{Binding ServerPort}"
     ///               BorderBrush="LightGreen"
     ///               BorderThickness="1" />
@@ -44,8 +44,9 @@ namespace YE.Control.UserControls
             nameof(IPAddress),
             typeof(string),
             typeof(IP),
-            new PropertyMetadata(
+            new FrameworkPropertyMetadata(
                 defaultIP,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 (d, e) =>
                 {
                     if (d is IP control)
@@ -85,7 +86,10 @@ namespace YE.Control.UserControls
             nameof(IPPort),
             typeof(int),
             typeof(IP),
-            new PropertyMetadata(8501)
+            new FrameworkPropertyMetadata(
+                8501,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault
+            )
         );
 
         #endregion

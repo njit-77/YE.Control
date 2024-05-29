@@ -30,7 +30,7 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
               Margin="5"
               HorizontalAlignment="Left"
               HasPort="{Binding ElementName=IPPort, Path=IsChecked}"
-              IPAddress="{Binding ServerIP, Mode=TwoWay}"
+              IPAddress="{Binding ServerIP}"
               IPPort="{Binding ServerPort}"
               BorderBrush="LightGreen"
               BorderThickness="1" />
@@ -49,8 +49,6 @@ System.Windows.Media.Brush MarginColor;
 /// 图像内容
 ImageSource ImageExSource;
 ```
-
-
 
 ###### 样例
 
