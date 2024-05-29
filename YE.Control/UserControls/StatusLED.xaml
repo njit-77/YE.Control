@@ -12,11 +12,27 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <TextBlock Margin="2,0" VerticalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:StatusLED}, Path=StatusText}" />
-        <Border Grid.Column="1"
-                Width="25"
-                Height="25"
-                Margin="2,0"
-                CornerRadius="15"
-                Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:StatusLED}, Path=StatusColor}" />
+        <Ellipse x:Name="ellipse"
+                 Grid.Column="1"
+                 Height="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Width}"
+                 MinWidth="20"
+                 MinHeight="20"
+                 Margin="2"
+                 Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:StatusLED}, Path=StatusColor, UpdateSourceTrigger=PropertyChanged}">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState x:Name="OnLineOk">
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames RepeatBehavior="Forever" Storyboard.TargetProperty="Opacity" Duration="0:0:1">
+                                <LinearDoubleKeyFrame KeyTime="0:0:0.5" Value="0.5" />
+                                <LinearDoubleKeyFrame KeyTime="0:0:1" Value="1" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="OnLineError" />
+                    <VisualState x:Name="OffLine" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Ellipse>
     </Grid>
 </UserControl>

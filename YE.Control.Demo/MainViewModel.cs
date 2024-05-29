@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows.Media;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using System;
 
 namespace YE.Control.Demo
 {
@@ -15,22 +14,23 @@ namespace YE.Control.Demo
             timer = new System.Threading.Timer(
                 (obj) =>
                 {
-                    if (ServerLEDColor == Brushes.Green)
+                    if (ServerLEDType == UserControls.StatusType.OffLine)
                     {
-                        ServerLEDColor = Brushes.Red;
+                        ServerLEDType = UserControls.StatusType.OnLine_OK;
                     }
-                    else if (ServerLEDColor == Brushes.Red)
+                    else if (ServerLEDType == UserControls.StatusType.OnLine_OK)
                     {
-                        ServerLEDColor = Brushes.Green;
+                        ServerLEDType = UserControls.StatusType.OnLine_Error;
+                    }
+                    else if (ServerLEDType == UserControls.StatusType.OnLine_Error)
+                    {
+                        ServerLEDType = UserControls.StatusType.OffLine;
                     }
 
-                    if (ClientLEDColor == Brushes.Green)
+
+                    if (ClientLEDType == UserControls.StatusType.OffLine)
                     {
-                        ClientLEDColor = Brushes.Red;
-                    }
-                    else if (ClientLEDColor == Brushes.Red)
-                    {
-                        ClientLEDColor = Brushes.Green;
+                        ClientLEDType = UserControls.StatusType.OnLine_OK;
                     }
                 },
                 null,
@@ -44,6 +44,17 @@ namespace YE.Control.Demo
 
         [ObservableProperty]
         private int serverPort = 8501;
+
+        [RelayCommand]
+        public void SaveIP()
+        {
+            System.Windows.MessageBox.Show(
+                $"IP:{ServerIP}, Port:{ServerPort}",
+                "Information",
+                System.Windows.MessageBoxButton.OK,
+                System.Windows.MessageBoxImage.Information
+            );
+        }
 
         [ObservableProperty]
         private string imagePathUri;
@@ -69,9 +80,15 @@ namespace YE.Control.Demo
         }
 
         [ObservableProperty]
-        private System.Windows.Media.Brush serverLEDColor = System.Windows.Media.Brushes.Green;
+        private YE.Control.UserControls.StatusType serverLEDType = YE.Control
+            .UserControls
+            .StatusType
+            .OffLine;
 
         [ObservableProperty]
-        private System.Windows.Media.Brush clientLEDColor = System.Windows.Media.Brushes.Green;
+        private YE.Control.UserControls.StatusType clientLEDType = YE.Control
+            .UserControls
+            .StatusType
+            .OffLine;
     }
 }

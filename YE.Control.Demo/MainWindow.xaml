@@ -31,7 +31,7 @@
                               Margin="5"
                               HorizontalAlignment="Left"
                               HasPort="{Binding ElementName=IPPort, Path=IsChecked}"
-                              IPAddress="{Binding ServerIP}"
+                              IPAddress="{Binding ServerIP, Mode=TwoWay}"
                               IPPort="{Binding ServerPort}"
                               BorderBrush="LightGreen"
                               BorderThickness="1" />
@@ -42,6 +42,11 @@
                           HorizontalAlignment="Left"
                           VerticalContentAlignment="Center"
                           Content="端口号" />
+                <Button Width="100"
+                        Height="30"
+                        Margin="5"
+                        Content="Save"
+                        Command="{Binding SaveIPCommand}" />
             </StackPanel>
         </TabItem>
         <TabItem Header="ImageEx">
@@ -62,12 +67,127 @@
                 <yecontrol:StatusLED Margin="5"
                                      HorizontalAlignment="Left"
                                      StatusText="服务器"
-                                     StatusColor="{Binding ServerLEDColor}" />
+                                     LEDType="{Binding ServerLEDType}"
+                                     OffLineColor="Orange"
+                                     OnLineOKColor="LightGreen"
+                                     OnLineErrorColor="OrangeRed" />
                 <yecontrol:StatusLED Margin="5"
                                      HorizontalAlignment="Left"
                                      StatusText="客户端"
-                                     StatusColor="{Binding ClientLEDColor}" />
+                                     LEDType="{Binding ClientLEDType}" />
             </StackPanel>
+        </TabItem>
+        <TabItem Header="Test">
+            <StackPanel>
+                <Ellipse Width="25" Height="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Width}" Fill="Green">
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Ellipse.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames RepeatBehavior="Forever" Storyboard.TargetProperty="Opacity" Duration="0:0:1">
+                                            <LinearDoubleKeyFrame KeyTime="0:0:0.5" Value="0.5" />
+                                            <LinearDoubleKeyFrame KeyTime="0:0:1" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+            </StackPanel>
+
+            <!--<StackPanel>
+
+                <Canvas HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button Content="Sleeping" Width="75" Canvas.Left="56" Canvas.Top="47" Click="BtnSleep_Click"/>
+                    <Button Content="Playing" Width="75" Canvas.Left="56" Canvas.Top="97" Click="BtnPlay_Click"/>
+                    <Button Content="Crying" Width="75" Canvas.Left="56" Canvas.Top="147" Click="BtnCry_Click"/>
+                    <Ellipse x:Name="ellipse1" Height="100" Stroke="Black" Width="100" Canvas.Left="216" Canvas.Top="54">
+                        <Ellipse.Fill>
+                            <SolidColorBrush x:Name="brush1" Color="Aqua"/>
+                        </Ellipse.Fill>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Sleeping">
+                                    <Storyboard>
+                                        <ColorAnimation To="LightBlue" Storyboard.TargetName="brush1"
+                                            Storyboard.TargetProperty="Color" Duration="0:0:5"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Playing">
+                                    <Storyboard>
+                                        <ColorAnimation To="Gold" Storyboard.TargetName="brush1"
+                                            Storyboard.TargetProperty="Color" Duration="0:0:5"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Crying">
+                                    <Storyboard>
+                                        <ColorAnimation To="Red" Storyboard.TargetName="brush1"
+                                            Storyboard.TargetProperty="Color" Duration="0:0:5"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition x:Name="ToSleeping" To="Sleeping">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:5" To="50"/>
+                                        </Storyboard>
+                                    </VisualTransition>
+            -->
+            <!-- 若是从Crying切换到Sleeping就不会执行上面的切换状态，只会执行下面的 -->
+            <!--
+                                    <VisualTransition x:Name="CryingToSleeping" From="Crying" To="Sleeping">
+                                        <Storyboard>
+                                            <ColorAnimation From="Black" To="White" Storyboard.TargetName="brush1"
+                                                Storyboard.TargetProperty="Color" Duration="0:0:5"/>
+                                        </Storyboard>
+                                    </VisualTransition>
+            -->
+            <!-- GeneratedDuration：表示延迟切换 -->
+            <!--
+                                    <VisualTransition To="Playing" GeneratedDuration="0:0:0.5"/>
+                                </VisualStateGroup.Transitions>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Ellipse>
+                </Canvas>
+
+            -->
+            <!--<Ellipse Width="50" Height="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Width}" Fill="Green">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup>
+                            <VisualState x:Name="OnLineOk">
+                                <Storyboard>
+                                    <DoubleAnimation AutoReverse="True"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     From="0.3"
+                                                     To="1"
+                                                     Duration="0:0:10" />
+                                </Storyboard>
+                            </VisualState>
+                            <VisualState x:Name="OnLineError"/>
+                            <VisualState x:Name="OffLine"/>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </Ellipse>-->
+
+            <!--<Ellipse Width="50" Height="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Width}" Fill="Green">
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Ellipse.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation AutoReverse="True"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         From="0.3"
+                                                         To="1"
+                                                         Duration="0:0:1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>-->
         </TabItem>
     </TabControl>
 </Window>
