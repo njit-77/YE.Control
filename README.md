@@ -1,7 +1,3 @@
----
-typora-root-url: Image
----
-
 # YE.Control
 YE.Control是一个基于WPF框架的控件库。
 
@@ -40,7 +36,7 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
               BorderThickness="1" />
 ```
 
-![IP](/IP.gif)
+
 
 #### ImageEx  图像显示控件，基于System.Windows.Controls.Image控件增加了图像缩放、拖动、鼠标点击事件[右键单击-图像大小还原]
 
@@ -65,7 +61,7 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
                    ImageExSource="{Binding ImagePathUri}" />
 ```
 
-![ImageEx](/ImageEx.gif)
+
 
 #### StatueLED 状态灯控件，用于显示网络状态或其它状态
 
@@ -117,4 +113,3 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
                      LEDType="{Binding ClientLEDType}" />
 ```
 
-![StatusLED](/StatusLED.gif)
