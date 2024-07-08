@@ -1,0 +1,30 @@
+﻿<Project>
+	<PropertyGroup>
+		<Copyright>Copyright © 2014 njit-77, Inc. All rights reserved.</Copyright>
+		<Authors>njit-77</Authors>
+		<Owners>njit-77</Owners>
+		
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/njit-77/YE.Control</PackageProjectUrl>
+	
+		<Description>YE.Control是一个基于WPF框架的控件库。</Description>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<TargetFrameworks>net462;net472;net6.0-windows;net7.0-windows;net8.0-windows;</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<UseWPF>true</UseWPF>
+		
+		<VersionPrefix>1.0</VersionPrefix>
+		<VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
+		<Version>$(VersionPrefix).$(VersionSuffix)</Version>
+		
+		<FileVersion>$(Version)</FileVersion>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<PackageVersion>$(Version)</PackageVersion>	
+		
+		<BaseOutputPath>..\bin\</BaseOutputPath>
+		<OutputPath>$(BaseOutputPath)</OutputPath>
+   </PropertyGroup>
+</Project>
