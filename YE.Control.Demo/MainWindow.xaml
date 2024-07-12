@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YE.Control.Demo"
         xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
-        Title="MainWindow"
+        Title="YE.Control.Demo"
         Width="800"
         Height="450"
         mc:Ignorable="d">

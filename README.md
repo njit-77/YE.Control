@@ -36,7 +36,7 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
               BorderThickness="1" />
 ```
 
-
+![](https://github.com/njit-77/YE.Control/blob/6d3fa61f8a2f0cc2b20d9d17da7a3ab8035c19b1/Image/IP.gif)
 
 #### ImageEx  图像显示控件，基于System.Windows.Controls.Image控件增加了图像缩放、拖动、鼠标点击事件[右键单击-图像大小还原]
 
@@ -60,6 +60,8 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
                    BorderThickness="3"
                    ImageExSource="{Binding ImagePathUri}" />
 ```
+
+![](https://github.com/njit-77/YE.Control/blob/6d3fa61f8a2f0cc2b20d9d17da7a3ab8035c19b1/Image/ImageEx.gif)
 
 
 
@@ -113,3 +115,4 @@ xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
                      LEDType="{Binding ClientLEDType}" />
 ```
 
+![](https://github.com/njit-77/YE.Control/blob/6d3fa61f8a2f0cc2b20d9d17da7a3ab8035c19b1/Image/StatusLED.gif)
