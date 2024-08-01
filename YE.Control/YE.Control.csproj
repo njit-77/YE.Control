@@ -5,7 +5,7 @@
 	  
 	  <AssemblyTitle>YE.Control</AssemblyTitle>
 
-	  <PackageReleaseNotes>fix:EnumExtension.GetDescription错误</PackageReleaseNotes>
+	  <PackageReleaseNotes>更新readme.md</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
