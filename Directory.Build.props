@@ -12,12 +12,12 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<TargetFrameworks>net462;net472;net6.0-windows;net7.0-windows;net8.0-windows;</TargetFrameworks>
+		<TargetFrameworks>net462;net6.0-windows;</TargetFrameworks>
 		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 		<LangVersion>latest</LangVersion>
 		<UseWPF>true</UseWPF>
 		
-		<VersionPrefix>1.0</VersionPrefix>
+		<VersionPrefix>1.1</VersionPrefix>
 		<VersionSuffix>$([System.DateTime]::Now.ToString(`yyyy.MMdd`))</VersionSuffix>
 		<Version>$(VersionPrefix).$(VersionSuffix)</Version>
 		

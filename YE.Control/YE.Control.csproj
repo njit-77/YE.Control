@@ -2,6 +2,7 @@
   <PropertyGroup>
 	<DebugType>none</DebugType>
 	<AssemblyTitle>YE.Control</AssemblyTitle>
+    <PackageReleaseNotes>1、增加ApplicationHelper类、IMessageBoxService接口；</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\README.md">
@@ -10,6 +11,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Serilog" />
     <PackageReference Include="ValueConverters" />
   </ItemGroup>
 </Project>

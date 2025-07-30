@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Win32;
 using System;
+using System.Threading.Tasks;
 
 namespace YE.Control.Demo
 {
@@ -37,6 +39,11 @@ namespace YE.Control.Demo
                 5_000,
                 5_000
             );
+
+            Task.Delay(3_000).ContinueWith(_ =>
+            {
+                throw new Exception("Exception From MainViewModel 3_000");
+            });
         }
 
         [ObservableProperty]
