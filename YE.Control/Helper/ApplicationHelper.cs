@@ -7,23 +7,23 @@ namespace YE.Control.Helper
     public class ApplicationHelper
     {
         public ApplicationHelper(
-            string guid,
-            IMessageBoxService messageBoxService,
-            Serilog.ILogger logger
+            string _assemblyGUID,
+            IMessageBoxService _messageBoxService,
+            Serilog.ILogger _logger
         )
         {
-            _assemblyGUID = guid;
-            _messageBoxService = messageBoxService;
-            _logger = logger;
+            assemblyGUID = _assemblyGUID;
+            messageBoxService = _messageBoxService;
+            logger = _logger;
         }
 
         #region Field
 
-        private readonly string _assemblyGUID;
+        private readonly string assemblyGUID;
 
-        private readonly IMessageBoxService _messageBoxService;
+        private readonly IMessageBoxService messageBoxService;
 
-        private Serilog.ILogger _logger;
+        private Serilog.ILogger logger;
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace YE.Control.Helper
         {
             if (!EnsureAssemblySingletion())
             {
-                _messageBoxService?.ShowMessage(
+                messageBoxService?.ShowMessage(
                     $"{System.Reflection.Assembly.GetEntryAssembly().GetName().Name} 服务实例已在运行中。",
                     MessageLevel.Information
                 );
@@ -84,14 +84,9 @@ namespace YE.Control.Helper
 
         private bool EnsureAssemblySingletion()
         {
-            _logger.Information(
-                "This is a message from {Name}.",
-                System.Reflection.Assembly.GetEntryAssembly().GetName().Name
-            );
-
             mutex = new System.Threading.Mutex(
                 true,
-                $"{System.Reflection.Assembly.GetEntryAssembly().GetName().Name} - {_assemblyGUID}",
+                $"{System.Reflection.Assembly.GetEntryAssembly().GetName().Name} - {assemblyGUID}",
                 out bool ret
             );
             if (ret)
@@ -111,20 +106,30 @@ namespace YE.Control.Helper
             System.Windows.Threading.DispatcherUnhandledExceptionEventArgs exception
         )
         {
-            _logger?.Error("[UI线程]异常：{ErrorException}.", exception.Exception);
+            string message =
+                $"[UI线程]异常：Message = {exception.Exception.Message},StackTrace ={exception.Exception.StackTrace}.";
 
-            _messageBoxService?.ShowMessage(exception.Exception.ToString(), MessageLevel.Error);
+            logger?.Error(message);
+
+            messageBoxService?.ShowMessage(message, MessageLevel.Error);
 
             exception.Handled = true;
         }
 
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs exception)
         {
-            _logger?.Fatal("[非UI线程]异常：{ErrorException}.", exception);
+            string message = $"[非UI线程]异常：Exception = {exception}.";
 
-            _messageBoxService?.ShowMessage("软件出现不可恢复错误，即将关闭。", MessageLevel.Error);
+            logger?.Fatal(message);
 
-            System.Windows.Application.Current.Shutdown();
+            messageBoxService?.ShowMessage(message, MessageLevel.Error);
+
+            if (exception.IsTerminating)
+            {
+                messageBoxService?.ShowMessage("软件出现不可恢复错误，即将关闭。", MessageLevel.Error);
+
+                System.Windows.Application.Current.Shutdown();
+            }
         }
 
         private void App_UnobservedTaskException(
@@ -132,9 +137,12 @@ namespace YE.Control.Helper
             UnobservedTaskExceptionEventArgs exception
         )
         {
-            _logger?.Fatal("Fatal - [Task]异常 Exception = {ErrorException}.", exception.Exception);
+            string message =
+                $"[Task]异常：Message = {exception.Exception.Message},StackTrace ={exception.Exception.StackTrace}.";
 
-            exception.SetObserved();
+            logger?.Fatal(message);
+
+            messageBoxService?.ShowMessage(message, MessageLevel.Error);
         }
 
         [System.Runtime.InteropServices.DllImport("kernel32")]
@@ -146,7 +154,11 @@ namespace YE.Control.Helper
 
         private int Unhandled_ExceptionFilter(ref long a)
         {
-            _logger?.Fatal("[非托管代码]异常：{FatalStackTrace}.", Environment.StackTrace);
+            string message = $"[非托管代码]异常：StackTrace ={Environment.StackTrace}.";
+
+            logger?.Fatal(message);
+
+            messageBoxService?.ShowMessage(message, MessageLevel.Error);
 
             return 1;
         }
