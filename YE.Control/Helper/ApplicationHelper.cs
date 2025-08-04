@@ -128,7 +128,7 @@ namespace YE.Control.Helper
             {
                 messageBoxService?.ShowMessage("软件出现不可恢复错误，即将关闭。", MessageLevel.Error);
 
-                System.Windows.Application.Current.Shutdown();
+                Environment.Exit(0);
             }
         }
 

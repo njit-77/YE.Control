@@ -12,6 +12,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" />
-    <PackageReference Include="ValueConverters" />
   </ItemGroup>
 </Project>

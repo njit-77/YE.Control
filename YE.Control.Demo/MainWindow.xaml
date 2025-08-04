@@ -17,11 +17,10 @@
     <TabControl TabStripPlacement="Left">
         <TabControl.Resources>
             <Style TargetType="TabItem">
-                <Setter Property="FontFamily" Value="Cascadia Code" />
-                <Setter Property="FontSize" Value="14" />
-                <Setter Property="Margin" Value="5" />
-                <Setter Property="Width" Value="100" />
+                <Setter Property="FontFamily" Value="JetBrains Mono" />
+                <Setter Property="Width" Value="120" />
                 <Setter Property="Height" Value="50" />
+                <Setter Property="Margin" Value="5" />
             </Style>
         </TabControl.Resources>
         <TabItem Header="IP">

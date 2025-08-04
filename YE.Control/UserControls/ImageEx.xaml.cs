@@ -8,8 +8,12 @@ namespace YE.Control.UserControls
     /// <summary>
     /// Image自定义控件，添加了缩放拖动功能
     /// <para>
-    /// 1、Image.Source = new Bitmap(newUri());
-    /// 2、Image.Source = new WriteableBitmap();
+    /// Image.Source = new Bitmap(newUri());
+    /// </para>
+    /// <para>
+    /// Image.Source = new WriteableBitmap();
+    /// </para>
+    /// <para>
     /// eg：WriteableBitmap效率 CopyMemory[kernel32.dll] > RtlMoveMemory[kernel32.dll] > Buffer.MemoryCopy
     /// </para>
     /// </summary>
@@ -19,7 +23,6 @@ namespace YE.Control.UserControls
         {
             InitializeComponent();
         }
-
 
         #region DependencyProperty
 
@@ -181,6 +184,5 @@ namespace YE.Control.UserControls
         }
 
         #endregion
-
     }
 }

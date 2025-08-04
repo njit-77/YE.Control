@@ -10,7 +10,7 @@ namespace YE.Control.UserControls
     /// IP地址自定义控件
     /// <code lang="xaml">
     /// <![CDATA[
-    /// <yecontrol:IP x:Name="IP2"
+    /// <YEControl:IP x:Name="IP2"
     ///               Width="180"
     ///               Height="30"
     ///               Margin="5"
