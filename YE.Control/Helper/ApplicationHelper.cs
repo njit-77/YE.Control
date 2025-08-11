@@ -9,7 +9,7 @@ namespace YE.Control.Helper
         public ApplicationHelper(
             string _assemblyGUID,
             IMessageBoxService _messageBoxService,
-            Serilog.ILogger _logger
+            IServers.ILogger _logger
         )
         {
             assemblyGUID = _assemblyGUID;
@@ -23,7 +23,7 @@ namespace YE.Control.Helper
 
         private readonly IMessageBoxService messageBoxService;
 
-        private Serilog.ILogger logger;
+        private IServers.ILogger logger;
 
         #endregion
 
@@ -137,12 +137,19 @@ namespace YE.Control.Helper
             UnobservedTaskExceptionEventArgs exception
         )
         {
-            string message =
-                $"[Task]异常：Message = {exception.Exception.Message},StackTrace ={exception.Exception.StackTrace}.";
+            if (!exception.Observed && exception.Exception != null)
+            {
+                foreach (var ex in exception.Exception.Flatten().InnerExceptions)
+                {
+                    string message =
+                        $"[Task]异常：Message = {ex.Message},StackTrace ={ex.StackTrace}.";
 
-            logger?.Fatal(message);
+                    logger?.Fatal(message);
 
-            messageBoxService?.ShowMessage(message, MessageLevel.Error);
+                    messageBoxService?.ShowMessage(message, MessageLevel.Error);
+                }
+                exception.SetObserved();
+            }
         }
 
         [System.Runtime.InteropServices.DllImport("kernel32")]

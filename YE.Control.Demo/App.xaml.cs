@@ -7,9 +7,6 @@ using YE.Control.Helper;
 
 namespace YE.Control.Demo
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         public static new App Current => (App)Application.Current;
@@ -25,6 +22,8 @@ namespace YE.Control.Demo
 
         protected override void OnStartup(StartupEventArgs e) 
         {
+            LoggingExtensions.AllocConsole();
+
             if (GetService<ApplicationHelper>()?.OnStartup() == true)
             {
                 MainWindow = GetService<MainWindow>();
@@ -37,6 +36,10 @@ namespace YE.Control.Demo
         protected override void OnExit(ExitEventArgs e) 
         {
             GetService<ApplicationHelper>()?.OnExit();
+
+            LoggingExtensions.FreeConsole();
+
+            NLog.LogManager.Shutdown();
 
             base.OnExit(e);
         }
@@ -73,7 +76,7 @@ namespace YE.Control.Demo
             services.AddSingleton(sp => new ApplicationHelper(
                 "14d28ff8-e0a0-44c3-a19e-eb51a89e36f8",
                 sp.GetRequiredService<IServers.IMessageBoxService>(),
-                sp.GetRequiredService<Serilog.ILogger>()
+                sp.GetRequiredService<IServers.ILogger>()
             ));
 
             return services.BuildServiceProvider();

@@ -5,22 +5,16 @@
 	<Description>基于YE.Control的测试Demo</Description>
   </PropertyGroup>
   <ItemGroup>
-	<None Include="..\LICENSE">
-	  <Pack>True</Pack>
-	  <PackagePath>\</PackagePath>
-	</None>
-	<None Include="..\README.md">
-	  <Pack>True</Pack>
-	  <PackagePath>\</PackagePath>
-	</None>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-    <PackageReference Include="Serilog.Enrichers.Thread" />
-    <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="NLog" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YE.Control\YE.Control.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Serilog;
+﻿using System.Runtime.InteropServices;
+using Microsoft.Extensions.DependencyInjection;
+using NLog;
 
 namespace YE.Control.Demo.Extensions;
 
@@ -7,17 +8,37 @@ public static class LoggingExtensions
 {
     public static void AddLogger(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddSingleton<Serilog.ILogger>(_ =>
+        NLog.LogManager.Setup()
+            .LoadConfiguration(builder =>
+            {
+                builder
+                    .ForLogger()
+                    .FilterMinLevel(LogLevel.Trace)
+                    .WriteToConsole(
+                        encoding: System.Text.Encoding.UTF8,
+                        layout: "${longdate} [ThreadID:${threadid}] [${level}] ${message} ${exception:format=ToString}"
+                    );
+                builder
+                    .ForLogger()
+                    .FilterMinLevel(LogLevel.Trace)
+                    .WriteToFile(
+                        fileName: "${basedir}/log/log${date:yyyyMMdd}.log",
+                        encoding: System.Text.Encoding.UTF8,
+                        layout: "${longdate} [ThreadID:${threadid}] [${level}] ${message} ${exception:format=ToString}"
+                    );
+            });
+
+        serviceCollection.AddSingleton<NLog.ILogger>(_ =>
         {
-            return new Serilog.LoggerConfiguration()
-                .Enrich.WithThreadId()
-                .MinimumLevel.Information()
-                .WriteTo.File(
-                    "./log/log.txt",
-                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {Properties} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
-                    rollingInterval: Serilog.RollingInterval.Day
-                )
-                .CreateLogger();
+            return NLog.LogManager.GetCurrentClassLogger();
         });
+
+        serviceCollection.AddSingleton<IServers.ILogger, Services.Logger>();
     }
+
+    [DllImport("kernel32.dll")]
+    public static extern bool AllocConsole();
+
+    [DllImport("kernel32.dll")]
+    public static extern bool FreeConsole();
 }

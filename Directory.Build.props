@@ -12,6 +12,7 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
+		<AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
 		<TargetFrameworks>net472;net8.0-windows;</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<UseWPF>true</UseWPF>

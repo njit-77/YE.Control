@@ -1,9 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
 
 namespace YE.Control.Demo
 {
@@ -13,37 +12,44 @@ namespace YE.Control.Demo
 
         public MainViewModel()
         {
-            timer = new System.Threading.Timer(
-                (obj) =>
-                {
-                    if (ServerLEDType == UserControls.StatusType.OffLine)
-                    {
-                        ServerLEDType = UserControls.StatusType.OnLine_OK;
-                    }
-                    else if (ServerLEDType == UserControls.StatusType.OnLine_OK)
-                    {
-                        ServerLEDType = UserControls.StatusType.OnLine_Error;
-                    }
-                    else if (ServerLEDType == UserControls.StatusType.OnLine_Error)
-                    {
-                        ServerLEDType = UserControls.StatusType.OffLine;
-                    }
-
-
-                    if (ClientLEDType == UserControls.StatusType.OffLine)
-                    {
-                        ClientLEDType = UserControls.StatusType.OnLine_OK;
-                    }
-                },
-                null,
-                5_000,
-                5_000
-            );
-
-            Task.Delay(3_000).ContinueWith(_ =>
+            if (timer == null)
             {
-                throw new Exception("Exception From MainViewModel 3_000");
-            });
+                timer = new System.Threading.Timer(
+                    (obj) =>
+                    {
+                        if (ServerLEDType == UserControls.StatusType.OffLine)
+                        {
+                            ServerLEDType = UserControls.StatusType.OnLine_OK;
+                        }
+                        else if (ServerLEDType == UserControls.StatusType.OnLine_OK)
+                        {
+                            ServerLEDType = UserControls.StatusType.OnLine_Error;
+                        }
+                        else if (ServerLEDType == UserControls.StatusType.OnLine_Error)
+                        {
+                            ServerLEDType = UserControls.StatusType.OffLine;
+                        }
+
+                        if (ClientLEDType == UserControls.StatusType.OffLine)
+                        {
+                            ClientLEDType = UserControls.StatusType.OnLine_OK;
+                        }
+                    },
+                    null,
+                    5_000,
+                    5_000
+                );
+            }
+
+            Task.Delay(3_000)
+                .ContinueWith(_ =>
+                {
+                    throw new Exception("Exception From MainViewModel 3_000");
+                });
+            App.Current.GetService<IServers.ILogger>().Info("测试");
+            App.Current.GetService<IServers.ILogger>().Info("Test");
+            App.Current.GetService<IServers.ILogger>().Info("테스트");
+            App.Current.GetService<IServers.ILogger>().Info("テスト");
         }
 
         [ObservableProperty]

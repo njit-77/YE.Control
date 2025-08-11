@@ -2,6 +2,13 @@
 
 class MessageBoxService : IServers.IMessageBoxService
 {
+    private readonly IServers.ILogger logger;
+
+    public MessageBoxService(IServers.ILogger _logger)
+    {
+        logger = _logger;
+    }
+
     public bool ShowMessage(string message, IServers.MessageLevel messageLevel)
     {
         System.Windows.MessageBoxResult result = System.Windows.MessageBoxResult.None;
@@ -10,6 +17,8 @@ class MessageBoxService : IServers.IMessageBoxService
             case IServers.MessageLevel.Information:
 
                 {
+                    logger.Info("MessageBox:{message}", message);
+
                     result = System.Windows.MessageBox.Show(
                         message,
                         "Information",
@@ -18,11 +27,15 @@ class MessageBoxService : IServers.IMessageBoxService
                         System.Windows.MessageBoxResult.None,
                         System.Windows.MessageBoxOptions.DefaultDesktopOnly
                     );
+
+                    logger.Info("MessageBoxResult:{result}", result);
                 }
                 break;
             case IServers.MessageLevel.Warning:
 
                 {
+                    logger.Warn("MessageBox:{message}", message);
+
                     result = System.Windows.MessageBox.Show(
                         message,
                         "Warning",
@@ -31,11 +44,15 @@ class MessageBoxService : IServers.IMessageBoxService
                         System.Windows.MessageBoxResult.None,
                         System.Windows.MessageBoxOptions.DefaultDesktopOnly
                     );
+
+                    logger.Warn("MessageBoxResult:{result}", result);
                 }
                 break;
             case IServers.MessageLevel.Error:
 
                 {
+                    logger.Error("MessageBox:{message}", message);
+
                     result = System.Windows.MessageBox.Show(
                         message,
                         "Error",
@@ -44,6 +61,8 @@ class MessageBoxService : IServers.IMessageBoxService
                         System.Windows.MessageBoxResult.None,
                         System.Windows.MessageBoxOptions.DefaultDesktopOnly
                     );
+
+                    logger.Error("MessageBoxResult:{result}", result);
                 }
                 break;
             default:

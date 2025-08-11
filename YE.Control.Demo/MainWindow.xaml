@@ -8,11 +8,8 @@
         Title="YE.Control.Demo"
         Width="800"
         Height="450"
+        d:DataContext="{d:DesignInstance local:MainViewModel}"
         mc:Ignorable="d">
-
-    <Window.DataContext>
-        <local:MainViewModel />
-    </Window.DataContext>
 
     <TabControl TabStripPlacement="Left">
         <TabControl.Resources>
