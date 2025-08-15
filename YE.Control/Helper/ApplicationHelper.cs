@@ -1,29 +1,32 @@
 ﻿using System;
 using System.Threading.Tasks;
-using YE.Control.IServers;
+using YE.Control.Log;
+using YE.Control.MessageBox;
 
 namespace YE.Control.Helper
 {
     public class ApplicationHelper
     {
         public ApplicationHelper(
-            string _assemblyGUID,
             IMessageBoxService _messageBoxService,
-            IServers.ILogger _logger
+            ILogger _logger,
+            string _assemblyGUID
         )
         {
-            assemblyGUID = _assemblyGUID;
             messageBoxService = _messageBoxService;
+
             logger = _logger;
+
+            assemblyGUID = _assemblyGUID;
         }
 
-        #region Field
-
-        private readonly string assemblyGUID;
+        #region readonly Field
 
         private readonly IMessageBoxService messageBoxService;
 
-        private IServers.ILogger logger;
+        private readonly ILogger logger;
+
+        private readonly string assemblyGUID;
 
         #endregion
 

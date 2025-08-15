@@ -1,4 +1,4 @@
-﻿namespace YE.Control.IServers;
+﻿namespace YE.Control.Log;
 
 public interface ILogger
 {
@@ -11,25 +11,4 @@ public interface ILogger
     void Error(string format, params object[] args);
 
     void Fatal(string format, params object[] args);
-
-    bool IsEnabled { get; set; }
-
-    LogLevel Level { get; set; }
-}
-
-public enum LogLevel
-{
-    All = 0,
-
-    Debug,
-
-    Info,
-
-    Warn,
-
-    Error,
-
-    Fatal,
-
-    Off = 0xff,
 }

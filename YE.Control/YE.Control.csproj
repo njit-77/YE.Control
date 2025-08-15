@@ -2,9 +2,6 @@
   <PropertyGroup>
 	<DebugType>none</DebugType>
 	<AssemblyTitle>YE.Control</AssemblyTitle>
-    <PackageReleaseNotes>1、增加ApplicationHelper类、IMessageBoxService接口；</PackageReleaseNotes>
+    <PackageReleaseNotes>1、移除对Serilog、ValueConverters的依赖；</PackageReleaseNotes>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="NLog" />
-  </ItemGroup>
 </Project>

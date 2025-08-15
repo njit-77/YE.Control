@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using YE.Control.Demo.Extensions;
 using YE.Control.Helper;
+using YE.Control.Log;
+using YE.Control.MessageBox;
 
 namespace YE.Control.Demo
 {
@@ -20,7 +22,7 @@ namespace YE.Control.Demo
 
         #region override
 
-        protected override void OnStartup(StartupEventArgs e) 
+        protected override void OnStartup(StartupEventArgs e)
         {
             LoggingExtensions.AllocConsole();
 
@@ -33,7 +35,7 @@ namespace YE.Control.Demo
             }
         }
 
-        protected override void OnExit(ExitEventArgs e) 
+        protected override void OnExit(ExitEventArgs e)
         {
             GetService<ApplicationHelper>()?.OnExit();
 
@@ -58,8 +60,14 @@ namespace YE.Control.Demo
             /// ILogger
             services.AddLogger();
 
-            /// IServiceCollection
-            services.AddSingleton<IServiceCollection>(services);
+            /// Service
+            services.AddSingleton<IMessageBoxService, Services.MessageBoxService>();
+
+            services.AddSingleton(sp => new ApplicationHelper(
+                sp.GetRequiredService<IMessageBoxService>(),
+                sp.GetRequiredService<ILogger>(),
+                "14d28ff8-e0a0-44c3-a19e-eb51a89e36f8"
+            ));
 
             /// WeakReferenceMessenger
             services.AddSingleton<WeakReferenceMessenger>();
@@ -69,15 +77,6 @@ namespace YE.Control.Demo
 
             /// Dispatcher
             services.AddSingleton(_ => Current.Dispatcher);
-
-            /// Service
-            services.AddSingleton<IServers.IMessageBoxService, Services.MessageBoxService>();
-
-            services.AddSingleton(sp => new ApplicationHelper(
-                "14d28ff8-e0a0-44c3-a19e-eb51a89e36f8",
-                sp.GetRequiredService<IServers.IMessageBoxService>(),
-                sp.GetRequiredService<IServers.ILogger>()
-            ));
 
             return services.BuildServiceProvider();
         }

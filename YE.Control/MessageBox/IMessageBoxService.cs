@@ -1,4 +1,4 @@
-﻿namespace YE.Control.IServers;
+﻿namespace YE.Control.MessageBox;
 
 public interface IMessageBoxService
 {

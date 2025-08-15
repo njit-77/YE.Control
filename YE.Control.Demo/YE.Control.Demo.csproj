@@ -14,7 +14,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Update="NLog.config">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>

@@ -8,32 +8,26 @@ public static class LoggingExtensions
 {
     public static void AddLogger(this IServiceCollection serviceCollection)
     {
-        NLog.LogManager.Setup()
-            .LoadConfiguration(builder =>
-            {
-                builder
-                    .ForLogger()
-                    .FilterMinLevel(LogLevel.Trace)
-                    .WriteToConsole(
-                        encoding: System.Text.Encoding.UTF8,
-                        layout: "${longdate} [ThreadID:${threadid}] [${level}] ${message} ${exception:format=ToString}"
-                    );
-                builder
-                    .ForLogger()
-                    .FilterMinLevel(LogLevel.Trace)
-                    .WriteToFile(
-                        fileName: "${basedir}/log/log${date:yyyyMMdd}.log",
-                        encoding: System.Text.Encoding.UTF8,
-                        layout: "${longdate} [ThreadID:${threadid}] [${level}] ${message} ${exception:format=ToString}"
-                    );
-            });
+        //NLog.LogManager.Setup()
+        //    .LoadConfiguration(builder =>
+        //    {
+        //        var layout =
+        //            "${longdate} [ThreadId:${threadid}] [${level}] ${message} ${all-event-properties} ${exception:format=tostring,stacktrace}";
 
-        serviceCollection.AddSingleton<NLog.ILogger>(_ =>
-        {
-            return NLog.LogManager.GetCurrentClassLogger();
-        });
+        //        builder
+        //            .ForLogger()
+        //            .FilterMinLevel(LogLevel.Trace)
+        //            .WriteToFile(fileName: "${basedir}/log/log${date:yyyyMMdd}.log", layout: layout)
+        //            .WithAsync();
 
-        serviceCollection.AddSingleton<IServers.ILogger, Services.Logger>();
+        //        builder
+        //            .ForLogger()
+        //            .FilterMinLevel(LogLevel.Trace)
+        //            .WriteToConsole(encoding: System.Text.Encoding.UTF8, layout: layout)
+        //            .WithAsync();
+        //    });
+
+        serviceCollection.AddSingleton<Log.ILogger, Services.Logger>();
     }
 
     [DllImport("kernel32.dll")]

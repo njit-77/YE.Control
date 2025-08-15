@@ -1,71 +1,81 @@
-﻿namespace YE.Control.Demo.Services
-{
-    internal class Logger : IServers.ILogger
-    {
-        public bool IsEnabled { get; set; } = true;
+﻿using YE.Control.Log;
 
-        public IServers.LogLevel Level { get; set; } = IServers.LogLevel.All;
+namespace YE.Control.Demo.Services
+{
+    class Logger : ILogger
+    {
+        enum LogLevel
+        {
+            All = 0,
+
+            Debug,
+
+            Info,
+
+            Warn,
+
+            Error,
+
+            Fatal,
+
+            Off = 0xff,
+        }
 
         public void Debug(string format, params object[] args) =>
-            Write(IServers.LogLevel.Debug, format, args);
+            Write(LogLevel.Debug, format, args);
 
-        public void Info(string format, params object[] args) =>
-            Write(IServers.LogLevel.Info, format, args);
+        public void Info(string format, params object[] args) => Write(LogLevel.Info, format, args);
 
-        public void Warn(string format, params object[] args) =>
-            Write(IServers.LogLevel.Warn, format, args);
+        public void Warn(string format, params object[] args) => Write(LogLevel.Warn, format, args);
 
         public void Error(string format, params object[] args) =>
-            Write(IServers.LogLevel.Error, format, args);
+            Write(LogLevel.Error, format, args);
 
         public void Fatal(string format, params object[] args) =>
-            Write(IServers.LogLevel.Fatal, format, args);
+            Write(LogLevel.Fatal, format, args);
 
-        private void Write(IServers.LogLevel logLevel, string format, params object[] args)
+        private void Write(LogLevel logLevel, string format, params object[] args)
         {
-            if (IsEnabled && logLevel >= Level)
+            var logger = NLog.LogManager.GetCurrentClassLogger();
+
+            switch (logLevel)
             {
-                var logger = App.Current.GetService<NLog.ILogger>();
+                case LogLevel.All:
+                    break;
+                case LogLevel.Debug:
 
-                switch (logLevel)
-                {
-                    case IServers.LogLevel.All:
-                        break;
-                    case IServers.LogLevel.Debug:
+                    {
+                        logger.Debug(format, args);
+                    }
+                    break;
+                case LogLevel.Info:
 
-                        {
-                            logger.Debug(format, args);
-                        }
-                        break;
-                    case IServers.LogLevel.Info:
+                    {
+                        logger.Info(format, args);
+                    }
+                    break;
+                case LogLevel.Warn:
 
-                        {
-                            logger.Info(format, args);
-                        }
-                        break;
-                    case IServers.LogLevel.Warn:
+                    {
+                        logger.Warn(format, args);
+                    }
+                    break;
+                case LogLevel.Error:
 
-                        {
-                            logger.Warn(format, args);
-                        }
-                        break;
-                    case IServers.LogLevel.Error:
+                    {
+                        logger.Error(format, args);
+                    }
+                    break;
+                case LogLevel.Fatal:
 
-                        {
-                            logger.Error(format, args);
-                        }
-                        break;
-                    case IServers.LogLevel.Fatal:
-
-                        {
-                            logger.Debug(format, args);
-                        }
-                        break;
-                    case IServers.LogLevel.Off:
-                        break;
-                    default:
-                        break;
-                }
+                    {
+                        logger.Debug(format, args);
+                    }
+                    break;
+                case LogLevel.Off:
+                    break;
+                default:
+                    break;
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
@@ -41,15 +40,10 @@ namespace YE.Control.Demo
                 );
             }
 
-            Task.Delay(3_000)
-                .ContinueWith(_ =>
-                {
-                    throw new Exception("Exception From MainViewModel 3_000");
-                });
-            App.Current.GetService<IServers.ILogger>().Info("测试");
-            App.Current.GetService<IServers.ILogger>().Info("Test");
-            App.Current.GetService<IServers.ILogger>().Info("테스트");
-            App.Current.GetService<IServers.ILogger>().Info("テスト");
+            App.Current.GetService<Log.ILogger>().Info("你好，世界");
+            App.Current.GetService<Log.ILogger>().Info("Hello,World");
+            App.Current.GetService<Log.ILogger>().Info("안녕하세요, 세계");
+            App.Current.GetService<Log.ILogger>().Info("こんにちは、世界");
         }
 
         [ObservableProperty]
