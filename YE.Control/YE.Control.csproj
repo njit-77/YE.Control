@@ -4,4 +4,10 @@
 	<AssemblyTitle>YE.Control</AssemblyTitle>
     <PackageReleaseNotes>1、移除对Serilog、ValueConverters的依赖；</PackageReleaseNotes>
   </PropertyGroup>
+  <ItemGroup>
+	 <None Include="..\README.md">
+		 <Pack>True</Pack>
+		 <PackagePath>\</PackagePath>
+	 </None>
+  </ItemGroup>
 </Project>
