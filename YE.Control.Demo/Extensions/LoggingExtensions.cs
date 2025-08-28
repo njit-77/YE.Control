@@ -1,6 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 using Microsoft.Extensions.DependencyInjection;
-using NLog;
 
 namespace YE.Control.Demo.Extensions;
 
