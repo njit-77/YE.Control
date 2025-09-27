@@ -20,7 +20,7 @@ class MessageBoxService : IMessageBoxService
             case MessageLevel.Information:
 
                 {
-                    logger.Info("MessageBox:{msg}", message);
+                    logger.Info("MessageBox : {msg}", message);
 
                     result = System.Windows.MessageBox.Show(
                         message,
@@ -31,13 +31,13 @@ class MessageBoxService : IMessageBoxService
                         System.Windows.MessageBoxOptions.DefaultDesktopOnly
                     );
 
-                    logger.Info("MessageBoxResult:{ret}", result);
+                    logger.Info("MessageBoxResult : {ret}", result);
                 }
                 break;
             case MessageLevel.Warning:
 
                 {
-                    logger.Warn("MessageBox:{msg}", message);
+                    logger.Warn("MessageBox : {msg}", message);
 
                     result = System.Windows.MessageBox.Show(
                         message,
@@ -48,13 +48,13 @@ class MessageBoxService : IMessageBoxService
                         System.Windows.MessageBoxOptions.DefaultDesktopOnly
                     );
 
-                    logger.Warn("MessageBoxResult:{ret}", result);
+                    logger.Warn("MessageBoxResult : {ret}", result);
                 }
                 break;
             case MessageLevel.Error:
 
                 {
-                    logger.Error("MessageBox:{msg}", message);
+                    logger.Error("MessageBox : {msg}", message);
 
                     result = System.Windows.MessageBox.Show(
                         message,
@@ -65,12 +65,25 @@ class MessageBoxService : IMessageBoxService
                         System.Windows.MessageBoxOptions.DefaultDesktopOnly
                     );
 
-                    logger.Error("MessageBoxResult:{ret}", result);
+                    logger.Error("MessageBoxResult : {ret}", result);
                 }
                 break;
             default:
                 break;
         }
         return result == System.Windows.MessageBoxResult.OK;
+    }
+
+    public void ShowException(System.Exception exception, ExceptionType exceptionType)
+    {
+        string errMsg = $"[{exceptionType}]异常：{exception.Message}, {exception.StackTrace}.";
+        ShowMessage(errMsg, MessageLevel.Error);
+
+        logger.Error(
+            "[{lev}]异常：{msg}, {stack}.",
+            exceptionType,
+            exception.Message,
+            exception.StackTrace
+        );
     }
 }

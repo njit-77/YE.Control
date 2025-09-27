@@ -65,7 +65,6 @@ namespace YE.Control.Demo
 
             services.AddSingleton(sp => new ApplicationHelper(
                 sp.GetRequiredService<IMessageBoxService>(),
-                sp.GetRequiredService<ILogger>(),
                 "14d28ff8-e0a0-44c3-a19e-eb51a89e36f8"
             ));
 

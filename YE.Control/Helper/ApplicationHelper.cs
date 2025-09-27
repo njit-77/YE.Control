@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
-using YE.Control.Log;
 using YE.Control.MessageBox;
 
 namespace YE.Control.Helper
 {
     public class ApplicationHelper
     {
-        public ApplicationHelper(
-            IMessageBoxService _messageBoxService,
-            ILogger _logger,
-            string _assemblyGUID
-        )
+        public ApplicationHelper(IMessageBoxService _messageBoxService, string _assemblyGUID)
         {
             messageBoxService = _messageBoxService;
-
-            logger = _logger;
 
             assemblyGUID = _assemblyGUID;
         }
@@ -23,8 +16,6 @@ namespace YE.Control.Helper
         #region readonly Field
 
         private readonly IMessageBoxService messageBoxService;
-
-        private readonly ILogger logger;
 
         private readonly string assemblyGUID;
 
@@ -109,27 +100,21 @@ namespace YE.Control.Helper
             System.Windows.Threading.DispatcherUnhandledExceptionEventArgs exception
         )
         {
-            string message =
-                $"[UI线程]异常：Message = {exception.Exception.Message},StackTrace ={exception.Exception.StackTrace}.";
-
-            logger?.Error(message);
-
-            messageBoxService?.ShowMessage(message, MessageLevel.Error);
+            messageBoxService.ShowException(exception.Exception, ExceptionType._UI);
 
             exception.Handled = true;
         }
 
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs exception)
         {
-            string message = $"[非UI线程]异常：Exception = {exception}.";
-
-            logger?.Fatal(message);
-
-            messageBoxService?.ShowMessage(message, MessageLevel.Error);
+            messageBoxService.ShowException(
+                exception.ExceptionObject as Exception,
+                ExceptionType._非UI
+            );
 
             if (exception.IsTerminating)
             {
-                messageBoxService?.ShowMessage("软件出现不可恢复错误，即将关闭。", MessageLevel.Error);
+                messageBoxService.ShowMessage("软件出现不可恢复错误，即将关闭。", MessageLevel.Error);
 
                 Environment.Exit(0);
             }
@@ -140,16 +125,11 @@ namespace YE.Control.Helper
             UnobservedTaskExceptionEventArgs exception
         )
         {
-            if (!exception.Observed && exception.Exception != null)
+            if (exception.Observed == false && exception.Exception != null)
             {
                 foreach (var ex in exception.Exception.Flatten().InnerExceptions)
                 {
-                    string message =
-                        $"[Task]异常：Message = {ex.Message},StackTrace ={ex.StackTrace}.";
-
-                    logger?.Fatal(message);
-
-                    messageBoxService?.ShowMessage(message, MessageLevel.Error);
+                    messageBoxService.ShowException(ex, ExceptionType._Task);
                 }
                 exception.SetObserved();
             }
@@ -164,11 +144,10 @@ namespace YE.Control.Helper
 
         private int Unhandled_ExceptionFilter(ref long a)
         {
-            string message = $"[非托管代码]异常：StackTrace ={Environment.StackTrace}.";
-
-            logger?.Fatal(message);
-
-            messageBoxService?.ShowMessage(message, MessageLevel.Error);
+            messageBoxService.ShowException(
+                new Exception($"StackTrace = {Environment.StackTrace}"),
+                ExceptionType._非托管代码
+            );
 
             return 1;
         }

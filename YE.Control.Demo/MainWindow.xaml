@@ -5,11 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YE.Control.Demo"
         xmlns:yecontrol="clr-namespace:YE.Control.UserControls;assembly=YE.Control"
+        xmlns:localConverter="clr-namespace:YE.Control.Demo.Converters"
         Title="YE.Control.Demo"
         Width="800"
         Height="450"
         d:DataContext="{d:DesignInstance local:MainViewModel}"
         mc:Ignorable="d">
+
+    <Window.Resources>
+        <localConverter:StringToImageSourceConverter x:Key="StringToImageSource" />
+    </Window.Resources>
 
     <TabControl TabStripPlacement="Left">
         <TabControl.Resources>
@@ -50,7 +55,7 @@
                 <yecontrol:ImageEx Height="300"
                                    BorderBrush="LightGreen"
                                    BorderThickness="3"
-                                   ImageExSource="{Binding ImagePathUri}" />
+                                   ImageExSource="{Binding ImagePathUri, Converter={StaticResource StringToImageSource}}" />
                 <Button Width="100"
                         Height="30"
                         Margin="5"
